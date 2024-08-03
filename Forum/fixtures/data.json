@@ -1,0 +1,85 @@
+[
+{
+  "model": "auth.group",
+  "pk": 1,
+  "fields": {
+    "name": "Moderator",
+    "permissions": [
+      [
+        "change_reply",
+        "webapp",
+        "reply"
+      ],
+      [
+        "delete_reply",
+        "webapp",
+        "reply"
+      ],
+      [
+        "change_topic",
+        "webapp",
+        "topic"
+      ],
+      [
+        "delete_topic",
+        "webapp",
+        "topic"
+      ]
+    ]
+  }
+},
+{
+  "model": "auth.user",
+  "pk": 1,
+  "fields": {
+    "password": "pbkdf2_sha256$720000$a9sPNTQbsqqBhhNwAFC0XW$dg8v1A2xEXIObmSKTYOR58C5xTXDPaXPBxCp7Uas+KE=",
+    "last_login": "2024-08-03T12:11:39.332Z",
+    "is_superuser": true,
+    "username": "admin",
+    "first_name": "",
+    "last_name": "",
+    "email": "",
+    "is_staff": true,
+    "is_active": true,
+    "date_joined": "2024-08-03T06:02:08.337Z",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "auth.user",
+  "pk": 2,
+  "fields": {
+    "password": "pbkdf2_sha256$720000$DWkdq8whOog2Nv9Vkx0c7p$PPTyMpv5novnrVv1k2kkHno0+Af9Rh601mRV3a7u1/s=",
+    "last_login": "2024-08-03T10:59:50.764Z",
+    "is_superuser": false,
+    "username": "Pizdaliz",
+    "first_name": "",
+    "last_name": "",
+    "email": "",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2024-08-03T06:06:46.287Z",
+    "groups": [],
+    "user_permissions": []
+  }
+},
+{
+  "model": "auth.user",
+  "pk": 9,
+  "fields": {
+    "password": "pbkdf2_sha256$720000$qyIXLQNziTdAwNEqecswpE$oUxcVx9QLvFFUJwPA1sHHS1dGLWrPXEecefL0O2SCXU=",
+    "last_login": null,
+    "is_superuser": false,
+    "username": "Moder",
+    "first_name": "",
+    "last_name": "",
+    "email": "",
+    "is_staff": false,
+    "is_active": true,
+    "date_joined": "2024-08-03T12:14:08.996Z",
+    "groups": [],
+    "user_permissions": []
+  }
+}
+]
