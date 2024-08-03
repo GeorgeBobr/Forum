@@ -1,0 +1,21 @@
+{% extends 'base.html' %}
+
+{% block title %}
+    <title>Создание темы</title>
+{% endblock %}
+
+{% block content %}
+  <h2>Создать тему</h2>
+  <form method="post">
+    {% csrf_token %}
+    <div class="mb-3">
+      <label for="id_title" class="form-label">Название</label>
+      <input type="text" name="title" id="id_title" class="form-control" maxlength="200" required>
+    </div>
+    <div class="mb-3">
+      <label for="id_content" class="form-label">Содержание</label>
+      <textarea name="content" id="id_content" class="form-control" required></textarea>
+    </div>
+    <button type="submit" class="btn btn-primary">Создать</button>
+  </form>
+{% endblock %}
