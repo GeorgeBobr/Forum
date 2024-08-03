@@ -1,3 +1,4 @@
 from django.contrib import admin
-
-# Register your models here.
+from webapp.models import Topic, Reply
+admin.site.register(Topic)
+admin.site.register(Reply)
