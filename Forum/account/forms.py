@@ -4,12 +4,10 @@ from django.contrib.auth.forms import UserCreationForm
 
 from account.models import Profile
 
-User = get_user_model()
 
 class MyUserCreationForm(UserCreationForm):
     class Meta(UserCreationForm.Meta):
         fields = ['username', 'password1', 'password2', 'first_name', 'last_name', 'email']
-
 
 
 class UserChangeForm(forms.ModelForm):
@@ -22,4 +20,4 @@ class UserChangeForm(forms.ModelForm):
 class ProfileChangeForm(forms.ModelForm):
     class Meta:
         model = Profile
-        fields = ['birth_date', 'avatar']
+        fields = ['birth_date', "avatar"]
