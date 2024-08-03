@@ -11,6 +11,8 @@ class TopicListView(ListView):
     context_object_name = 'topics'
     ordering = ['-created_at']
 
+
+
 class TopicDetailView(DetailView):
     model = Topic
     template_name = 'topic/topic_detail.html'
