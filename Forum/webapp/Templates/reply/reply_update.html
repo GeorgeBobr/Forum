@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h2 class="mb-4">Редактирование ответа</h2>
+
+<form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit" class="btn btn-primary">Сохранить изменения</button>
+    <a href="{% url 'webapp:topic_detail' object.topic.pk %}" class="btn btn-secondary">Отменить</a>
+</form>
+{% endblock %}
