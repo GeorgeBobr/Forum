@@ -5,6 +5,7 @@ from django.contrib.auth.mixins import LoginRequiredMixin, UserPassesTestMixin
 from account.forms import MyUserCreationForm, ProfileChangeForm
 from django.core.paginator import Paginator
 from django.contrib.auth.views import PasswordChangeView
+from webapp.models import Topic, Reply  # Импортируйте ваши модели
 
 User = get_user_model()
 
@@ -35,19 +36,25 @@ class ProfileView(LoginRequiredMixin, DetailView):
     paginate_related_orphans = 0
 
     def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
         user = self.object
-        posts = user.post_set.order_by('-created_at')
-        paginator = Paginator(posts, self.paginate_related_by, orphans=self.paginate_related_orphans)
-        page_number = self.request.GET.get('page', 1)
-        page = paginator.get_page(page_number)
 
-        comment_count = user.comment_set.count()
+        # Получение количества комментариев
+        comment_count = Reply.objects.filter(author=user).count()
+        context['comment_count'] = comment_count
 
-        kwargs['page_obj'] = page
-        kwargs['posts'] = page.object_list
-        kwargs['is_paginated'] = page.has_other_pages()
-        kwargs['comment_count'] = comment_count
-        return super().get_context_data(**kwargs)
+        # Получение топиков пользователя
+        topics = Topic.objects.filter(author=user)
+        context['topics'] = topics
+
+        # Пагинация для топиков
+        paginator = Paginator(topics, 10)  # Показывать по 10 топиков на странице
+        page_number = self.request.GET.get('page')
+        page_obj = paginator.get_page(page_number)
+        context['page_obj'] = page_obj
+        context['is_paginated'] = page_obj.has_other_pages()
+
+        return context
 
 
 class UserChangeView(UserPassesTestMixin, UpdateView):
