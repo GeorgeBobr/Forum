@@ -1,0 +1,81 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<h2 class="mb-4">Темы</h2>
+<div class="table-responsive">
+    <table class="table">
+        <tbody>
+            {% for topic in topics %}
+            <tr class="topic-row" data-topic-id="{{ topic.pk }}">
+                <td colspan="4">
+                    <a href="{% url 'webapp:topic_detail' topic.pk %}" class="d-block">
+                        <div class="p-3">
+                            <h5 class="mb-1">{{ topic.title }}</h5>
+                            <p class="mb-1">Дата создания: {{ topic.created_at|date:"d M Y" }}</p>
+                            <p class="mb-1">Автор: {{ topic.author.username }}</p>
+                            <p class="mb-0">Ответов: <span class="reply-count" data-reply-count="{{ topic.replies.count }}">{{ topic.replies.count }}</span></p>
+                        </div>
+                    </a>
+                </td>
+            </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+<style>
+    .table a {
+        color: black;
+        text-decoration: none;
+    }
+    .table a:hover {
+        color: black;
+    }
+    .table tr {
+        position: relative;
+        transition: background-color 0.3s;
+    }
+    .table tr:hover::after {
+        content: "";
+        position: absolute;
+        left: 0;
+        bottom: 0;
+        width: 100%;
+        height: 3px;
+        background-color: #007bff;
+    }
+    .table td {
+        padding: 1rem;
+    }
+    .table tbody tr {
+        margin-bottom: 0.5rem;
+    }
+</style>
+{% endblock %}
+
+{% block extra_js %}
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const replyCounts = document.querySelectorAll('.reply-count');
+
+        replyCounts.forEach(count => {
+            // Подсчет и отображение количества ответов
+            const replyCount = parseInt(count.getAttribute('data-reply-count'), 10);
+            count.textContent = replyCount;
+        });
+    });
+
+    document.addEventListener('DOMContentLoaded', function() {
+        const rows = document.querySelectorAll('.topic-row');
+
+        rows.forEach(row => {
+            row.addEventListener('mouseenter', function() {
+                this.classList.add('highlight');
+            });
+
+            row.addEventListener('mouseleave', function() {
+                this.classList.remove('highlight');
+            });
+        });
+    });
+</script>
+{% endblock %}
