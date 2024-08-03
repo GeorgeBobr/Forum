@@ -7,7 +7,6 @@ from webapp.forms import TopicForm, ReplyForm
 class ReplyCreateView(LoginRequiredMixin, CreateView):
     model = Reply
     form_class = ReplyForm
-    template_name = 'reply/reply_create.html'
 
     def form_valid(self, form):
         form.instance.author = self.request.user
@@ -30,7 +29,6 @@ class ReplyUpdateView(LoginRequiredMixin, UserPassesTestMixin, UpdateView):
 
 class ReplyDeleteView(LoginRequiredMixin, UserPassesTestMixin, DeleteView):
     model = Reply
-    template_name = 'reply/reply_delete.html'
 
     def test_func(self):
         return self.request.user == self.get_object().author
